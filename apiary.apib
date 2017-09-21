@@ -1,80 +1,127 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://app.eaternity.org/gastro/
 
 # Eaternity Gastro Backend
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+TODO
 
-## Questions Collection [/questions]
+## Menu Collection [/menus]
 
-### List All Questions [GET]
+### List All Menus [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+        {
+            "results":[
+                {
+                    "id": "M12312”,
+                    "name": "Arabic Risotto with Salad”,
+                    "servings":40,
+                    "co2-value":35,
+                    "vita-score":22,
+                    "components":[
+                        {
+                            "course": "salad",
+                            "quantity": { "amount":100, "unit": "g" },
+                            "recipe":
+                                {
+                                    "title":"Mushroom sauce",
+                                    "id": "X20Y",
+                                    "servings":2,
+                                    "co2-value":35,
+                                    "vita-score":22,
+                                    "instructions": "some very long text with \n etc."
+                                }
+                        },
+                        ...
+                    ]
+                },
+                ...
+            ]
+        }
+      
+      
+## Menu [/menus/{id}]  
 
-### Create a New Question [POST]
+### Get One Menu [GET]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
++ Response 200 (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
+            "results":[
+                {
+                    "id": "M12312”,
+                    "name": "Arabic Risotto with Salad”,
+                    "servings":40,
+                    "co2-value":35,
+                    "vita-score":22,
+                    "components":[
+                        {
+                            "course": "salad",
+                            "quantity":{"amount":100, "unit": "g"},
+                            "recipe":
+                                {
+                                    "id": "X20Y",
+                                    "title":"Mushroom sauce",
+                                    "servings":2,
+                                    "co2-value":35,
+                                    "vita-score":22,
+                                    "instructions": "some very long text with \n etc."
+                                }
+                        },
+                        ...
+                    ]
+                }
             ]
         }
 
+
+### Create a New Menu [PUT]
+
+
++ Request (application/json)
+
+        { 
+            "name": "Arabic Risotto with Salad",
+            "servings": 4,
+            "components":[
+                {
+                    "course": "salad",
+                    "quantity": { "amount":100, "unit": "g" },
+                    "recipe": { "id": "X20Y" }
+                },
+                {
+                    "course": "main",
+                    "quantity": { "amount":150, "unit": "g" },
+                    "recipe": { "id": "G563" }
+                },
+                …
+            ]
+            }
+        }
+
+
+
 + Response 201 (application/json)
 
-    + Headers
 
-            Location: /questions/2
 
-    + Body
+## Recipe Collection [/recipes]
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+### List All Recipes [GET]
+
++ Response 201 (application/json)
+
+        {
+            "results":[
+                {
+                    "id": "X20Y",
+                    "title": "title",
+                    "servings":2,
+                    "co2-value":35,
+                    "vita-score":22,
+                    "instructions": "some very long text with \n etc."
+                },
+                ...
+            ]
+        }
