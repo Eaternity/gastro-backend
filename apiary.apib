@@ -3,11 +3,17 @@ HOST: https://app.eaternity.org/gastro/
 
 # Eaternity Gastro Backend
 
-TODO
+Things to clarify:
 
-## Menu Collection [/menus]
+- format of calculated values (how many digits)
+- error message handling (e.g. InvalidConfigurationException)
+- component type (commercial, conceptual product etc)
 
-### List All Menus [GET]
+## Recipe Collection [/recipes]
+
+### List All Recipes [GET]
+
+Query Parameters: kitchen-id
 
 + Response 200 (application/json)
 
@@ -15,22 +21,38 @@ TODO
             "results":[
                 {
                     "id": "M12312”,
-                    "name": "Arabic Risotto with Salad”,
+                    "title": "Arabic Risotto with Salad”,
                     "servings":40,
                     "co2-value":35,
                     "vita-score":22,
+                    "water-scarcity": 22,
+                    "menu-line": "Menu 1",
+                    "instructions": "some very long text with \n etc."
                     "components":[
                         {
                             "course": "salad",
                             "quantity": { "amount":100, "unit": "g" },
-                            "recipe":
+                            "component":
                                 {
-                                    "title":"Mushroom sauce",
+                                    "title":"Mushroom Salat",
                                     "id": "X20Y",
-                                    "servings":2,
+                                    "type": "recipe",
                                     "co2-value":35,
                                     "vita-score":22,
-                                    "instructions": "some very long text with \n etc."
+                                    "water-scarcity": 22,
+                                }
+                        },
+                        {
+                            "course": "main course",
+                            "quantity": { "amount":2, "unit": "servings" },
+                            "component":
+                                {
+                                    "title":"Arabic Risotto",
+                                    "id": "X20Y",
+                                    "type": "recipe",
+                                    "co2-value":35,
+                                    "vita-score":22,
+                                    "water-scarcity": 22,
                                 }
                         },
                         ...
@@ -41,9 +63,9 @@ TODO
         }
       
       
-## Menu [/menus/{id}]  
+## Recipe [/recipes/{id}]  
 
-### Get One Menu [GET]
+### Get One Recipe [GET]
 
 + Response 200 (application/json)
 
@@ -51,22 +73,38 @@ TODO
             "results":[
                 {
                     "id": "M12312”,
-                    "name": "Arabic Risotto with Salad”,
+                    "title": "Arabic Risotto with Salad”,
                     "servings":40,
                     "co2-value":35,
                     "vita-score":22,
+                    "water-scarcity": 22,
+                    "menu-line": "Menu 1",
+                    "instructions": "some very long text with \n etc."
                     "components":[
                         {
                             "course": "salad",
-                            "quantity":{"amount":100, "unit": "g"},
-                            "recipe":
+                            "quantity": { "amount":100, "unit": "g" },
+                            "component":
                                 {
+                                    "title":"Mushroom Salat",
                                     "id": "X20Y",
-                                    "title":"Mushroom sauce",
-                                    "servings":2,
+                                    "type": "recipe",
                                     "co2-value":35,
                                     "vita-score":22,
-                                    "instructions": "some very long text with \n etc."
+                                    "water-scarcity": 22,
+                                }
+                        },
+                        {
+                            "course": "main course",
+                            "quantity": { "amount":150, "unit": "g" },
+                            "component":
+                                {
+                                    "title":"Arabic Risotto",
+                                    "id": "X20Y",
+                                    "type": "recipe",
+                                    "co2-value":35,
+                                    "vita-score":22,
+                                    "water-scarcity": 22,
                                 }
                         },
                         ...
@@ -76,24 +114,34 @@ TODO
         }
 
 
-### Create a New Menu [PUT]
+### Create a New Recipe [PUT]
 
 
 + Request (application/json)
 
         { 
-            "name": "Arabic Risotto with Salad",
+            "title": "Arabic Risotto with Salad",
             "servings": 4,
+            "menu-line": "Menu 1",
+            "instructions": "some very long text with \n etc."
             "components":[
                 {
                     "course": "salad",
                     "quantity": { "amount":100, "unit": "g" },
-                    "recipe": { "id": "X20Y" }
+                    "component": 
+                        { 
+                            "id": "X20Y",
+                            "type": "recipe",
+                        }
                 },
                 {
                     "course": "main",
                     "quantity": { "amount":150, "unit": "g" },
-                    "recipe": { "id": "G563" }
+                    "component": 
+                        { 
+                            "id": "G563",
+                            "type": "conceptual-product"
+                        }
                 },
                 …
             ]
@@ -103,25 +151,3 @@ TODO
 
 
 + Response 201 (application/json)
-
-
-
-## Recipe Collection [/recipes]
-
-### List All Recipes [GET]
-
-+ Response 201 (application/json)
-
-        {
-            "results":[
-                {
-                    "id": "X20Y",
-                    "title": "title",
-                    "servings":2,
-                    "co2-value":35,
-                    "vita-score":22,
-                    "instructions": "some very long text with \n etc."
-                },
-                ...
-            ]
-        }
