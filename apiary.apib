@@ -9,6 +9,9 @@ Things to clarify:
 - error message handling (e.g. InvalidConfigurationException)
 - component type (commercial, conceptual product etc)
 
+- menu-line-id: we need to fill that for existing recipes from the server manually.
+And we can assume that three menu lines exist with ids 1,2 and 3
+
 ## Recipe Collection [/recipes]
 
 ### List All Recipes [GET]
@@ -24,9 +27,24 @@ Query Parameters: kitchen-id
                     "title": "Arabic Risotto with Salad”,
                     "servings":40,
                     "co2-value":35,
-                    "vita-score":22,
+                    "co2-rating": "e",
+                    "vita-score":822
+                    "vita-score-rating": "b",
                     "water-scarcity": 22,
-                    "menu-line": "Menu 1",
+                    "water-scarcity-rating": "c",
+                    "nutritional-balanced": true,
+                    "nutrients": [
+                        {
+                            "nutrient": "ENERC",
+                            "quantity": { "amount":243, "unit": "kcal" },
+                        },
+                        {
+                            "nutrient": "FAT",
+                            "quantity": { "amount":22, "unit": "g" },
+                        },
+                        ...
+                    ],
+                    "menu-line-id": 232,
                     "instructions": "some very long text with \n etc."
                     "components":[
                         {
@@ -36,10 +54,7 @@ Query Parameters: kitchen-id
                                 {
                                     "title":"Mushroom Salat",
                                     "id": "X20Y",
-                                    "type": "recipe",
-                                    "co2-value":35,
-                                    "vita-score":22,
-                                    "water-scarcity": 22,
+                                    "type": "recipe"
                                 }
                         },
                         {
@@ -49,10 +64,7 @@ Query Parameters: kitchen-id
                                 {
                                     "title":"Arabic Risotto",
                                     "id": "X20Y",
-                                    "type": "recipe",
-                                    "co2-value":35,
-                                    "vita-score":22,
-                                    "water-scarcity": 22,
+                                    "type": "recipe"
                                 }
                         },
                         ...
@@ -76,9 +88,24 @@ Query Parameters: kitchen-id
                     "title": "Arabic Risotto with Salad”,
                     "servings":40,
                     "co2-value":35,
-                    "vita-score":22,
+                    "co2-rating": "e",
+                    "vita-score":822,
+                    "vita-score-rating": "b",
                     "water-scarcity": 22,
-                    "menu-line": "Menu 1",
+                    "water-scarcity-rating": "c",
+                    "nutritional-balanced": true,
+                    "nutrients": [
+                        {
+                            "nutrient": "ENERC",
+                            "quantity": { "amount":243, "unit": "kcal" },
+                        },
+                        {
+                            "nutrient": "FAT",
+                            "quantity": { "amount":22, "unit": "g" },
+                        },
+                        ...
+                    ],
+                    "menu-line-id": 232,
                     "instructions": "some very long text with \n etc."
                     "components":[
                         {
@@ -122,7 +149,7 @@ Query Parameters: kitchen-id
         { 
             "title": "Arabic Risotto with Salad",
             "servings": 4,
-            "menu-line": "Menu 1",
+            "menu-line-id": 232,
             "instructions": "some very long text with \n etc."
             "components":[
                 {
