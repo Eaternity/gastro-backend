@@ -12,9 +12,9 @@ Things to clarify:
 - menu-line-id: we need to fill that for existing recipes from the server manually.
 And we can assume that three menu lines exist with ids 1,2 and 3
 
-## Recipe Collection [/recipes]
+## Recipe Collection [/menus]
 
-### List All Recipes [GET]
+### List All Menus [GET]
 
 Query Parameters: kitchen-id
 
@@ -73,6 +73,64 @@ Query Parameters: kitchen-id
                 ...
             ]
         }
+
+
+## Recipe Collection [/recipes]
+
+### List All Recipes [GET]
+
++ Response 200 (application/json)
+
+        {
+            "results":[
+                {
+                    "id": "M12312”,
+                    "title": "Arabic Risotto with Salad”,
+                    "servings":40,
+                    "co2-value":35,
+                    "co2-rating": "e",
+                    "vita-score":822
+                    "vita-score-rating": "b",
+                    "water-scarcity": 22,
+                    "water-scarcity-rating": "c",
+                    "nutritional-balanced": true,
+                    "nutrients": [
+                        {
+                            "nutrient": "ENERC",
+                            "quantity": { "amount":243, "unit": "kcal" },
+                        },
+                        {
+                            "nutrient": "FAT",
+                            "quantity": { "amount":22, "unit": "g" },
+                        },
+                        ...
+                    ],
+                    "instructions": "some very long text with \n etc."
+                    "components":[
+                        {
+                            "quantity": { "amount":100, "unit": "g" },
+                            "component":
+                                {
+                                    "title":"Mushroom Salat",
+                                    "id": "X20Y",
+                                    "type": "recipe"
+                                }
+                        },
+                        {
+                            "quantity": { "amount":2, "unit": "servings" },
+                            "component":
+                                {
+                                    "title":"Arabic Risotto",
+                                    "id": "X20Y",
+                                    "type": "recipe"
+                                }
+                        },
+                        ...
+                    ]
+                },
+                ...
+            ]
+        }
       
       
 ## Recipe [/recipes/{id}]  
@@ -105,11 +163,9 @@ Query Parameters: kitchen-id
                         },
                         ...
                     ],
-                    "menu-line-id": 232,
                     "instructions": "some very long text with \n etc."
                     "components":[
                         {
-                            "course": "salad",
                             "quantity": { "amount":100, "unit": "g" },
                             "component":
                                 {
@@ -122,7 +178,6 @@ Query Parameters: kitchen-id
                                 }
                         },
                         {
-                            "course": "main course",
                             "quantity": { "amount":150, "unit": "g" },
                             "component":
                                 {
@@ -149,11 +204,9 @@ Query Parameters: kitchen-id
         { 
             "title": "Arabic Risotto with Salad",
             "servings": 4,
-            "menu-line-id": 232,
             "instructions": "some very long text with \n etc."
             "components":[
                 {
-                    "course": "salad",
                     "quantity": { "amount":100, "unit": "g" },
                     "component": 
                         { 
@@ -162,7 +215,6 @@ Query Parameters: kitchen-id
                         }
                 },
                 {
-                    "course": "main",
                     "quantity": { "amount":150, "unit": "g" },
                     "component": 
                         { 
