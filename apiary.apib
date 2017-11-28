@@ -50,6 +50,10 @@ Query Parameters: kitchen-id
                         {
                             "section": "salad",
                             "quantity": { "amount":100, "unit": "g" },
+                            "origin": "local",
+                            "transport": "ground",
+                            "production": "organic",
+                            "conservation": "fresh",
                             "component":
                                 {
                                     "title":"Mushroom Salat",
@@ -60,6 +64,10 @@ Query Parameters: kitchen-id
                         {
                             "section": "main course",
                             "quantity": { "amount":2, "unit": "servings" },
+                            "origin": "",
+                            "transport": "air",
+                            "production": "standard",
+                            "conservation": "dried",
                             "component":
                                 {
                                     "title":"Arabic Risotto",
@@ -73,6 +81,101 @@ Query Parameters: kitchen-id
                 ...
             ]
         }
+
+        
+### Create new Menu [POST]
+
++ Request (application/json)
+
+        {
+            "title": "Arabic Risotto with Salad”,
+            "servings":40,
+            "menuLineId": 232,
+            "instructions": "some very long text with \n etc."
+            "components":[
+                {
+                    "section": "salad",
+                    "quantity": { "amount":100, "unit": "g" },
+                    "origin": "local",
+                    "transport": "ground",
+                    "production": "organic",
+                    "conservation": "fresh",
+                    "component":
+                        {
+                            "title":"Mushroom Salat",
+                            "id": "X20Y",
+                            "type": "recipe"
+                        }
+                },
+                {
+                    "section": "main course",
+                    "quantity": { "amount":2, "unit": "servings" },
+                    "origin": "",
+                    "transport": "air",
+                    "production": "standard",
+                    "conservation": "dried",
+                    "component":
+                        {
+                            "title":"Arabic Risotto",
+                            "id": "X20Y",
+                            "type": "recipe"
+                        }
+                },
+                ...
+            ]
+        }
+
++ Response 200 (application/json)
+
+## Menu [/menus/{id}]
+
+### Update/Overwrite existing Menu [PUT]
+
++ Request (application/json)
+
+        {
+            "title": "Arabic Risotto with Salad”,
+            "servings":40,
+            "menuLineId": 232,
+            "instructions": "some very long text with \n etc."
+            "components":[
+                {
+                    "section": "salad",
+                    "quantity": { "amount":100, "unit": "g" },
+                    "origin": "local",
+                    "transport": "ground",
+                    "production": "organic",
+                    "conservation": "fresh",
+                    "component":
+                        {
+                            "title":"Mushroom Salat",
+                            "id": "X20Y",
+                            "type": "recipe"
+                        }
+                },
+                {
+                    "section": "main course",
+                    "quantity": { "amount":2, "unit": "servings" },
+                    "origin": "",
+                    "transport": "air",
+                    "production": "standard",
+                    "conservation": "dried",
+                    "component":
+                        {
+                            "title":"Arabic Risotto",
+                            "id": "X20Y",
+                            "type": "recipe"
+                        }
+                },
+                ...
+            ]
+        }
+
++ Response 200 (application/json)
+
+### Delete Menu [DELETE]
+
++ Response 200 (application/json)
 
 
 ## Recipe Collection [/recipes]
@@ -131,7 +234,7 @@ Query Parameters: kitchen-id
                 ...
             ]
         }
-      
+
       
 ## Recipe [/recipes/{id}]  
 
@@ -236,11 +339,19 @@ Query Parameters: kitchen-id
             "results":[
                 {
                     "id": "G563",
-                    "name": "Zucchini”
+                    "name": "Zucchini",
+                    "configurationPossibilities": {
+                        "production": ["standard", "organic"],
+                        "conservation": ["fresh", "dried"]
+                    }
                 },
                 {
                     "id": "G563",
-                    "name": "Zucchini”
+                    "name": "Zucchini",
+                    "configurationPossibilities": {
+                        "production": ["standard", "suckler-cow"],
+                        "conservation": ["fresh", "frozen", "conserved"]
+                    }
                 },
                 ...
             ]
