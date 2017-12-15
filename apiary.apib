@@ -25,10 +25,10 @@ Query Parameters: kitchen-id
                 {
                     "id": "M12312”,
                     "title": "Arabic Risotto with Salad”,
-                    "servings":40,
-                    "co2Value":35,
+                    "servings": 40,
+                    "co2Value": 35,
                     "co2Rating": "e",
-                    "vitaScore":822
+                    "vitaScore": 822
                     "vitaScoreRating": "b",
                     "waterScarcity": 22,
                     "waterScarcityRating": "c",
@@ -56,7 +56,6 @@ Query Parameters: kitchen-id
                             "conservation": "fresh",
                             "component":
                                 {
-                                    "title":"Mushroom Salat",
                                     "id": "X20Y",
                                     "type": "recipe"
                                 }
@@ -70,7 +69,6 @@ Query Parameters: kitchen-id
                             "conservation": "dried",
                             "component":
                                 {
-                                    "title":"Arabic Risotto",
                                     "id": "X20Y",
                                     "type": "recipe"
                                 }
@@ -89,7 +87,7 @@ Query Parameters: kitchen-id
 
         {
             "title": "Arabic Risotto with Salad”,
-            "servings":40,
+            "servings": 40,
             "menuLineId": 232,
             "instructions": "some very long text with \n etc."
             "components":[
@@ -102,7 +100,6 @@ Query Parameters: kitchen-id
                     "conservation": "fresh",
                     "component":
                         {
-                            "title":"Mushroom Salat",
                             "id": "X20Y",
                             "type": "recipe"
                         }
@@ -116,7 +113,6 @@ Query Parameters: kitchen-id
                     "conservation": "dried",
                     "component":
                         {
-                            "title":"Arabic Risotto",
                             "id": "X20Y",
                             "type": "recipe"
                         }
@@ -129,13 +125,13 @@ Query Parameters: kitchen-id
 
 ## Menu [/menus/{id}]
 
-### Update/Overwrite existing Menu [PUT]
+### Create/update existing Menu [PUT]
 
 + Request (application/json)
 
         {
             "title": "Arabic Risotto with Salad”,
-            "servings":40,
+            "servings": 40,
             "menuLineId": 232,
             "instructions": "some very long text with \n etc."
             "components":[
@@ -148,7 +144,6 @@ Query Parameters: kitchen-id
                     "conservation": "fresh",
                     "component":
                         {
-                            "title":"Mushroom Salat",
                             "id": "X20Y",
                             "type": "recipe"
                         }
@@ -162,7 +157,6 @@ Query Parameters: kitchen-id
                     "conservation": "dried",
                     "component":
                         {
-                            "title":"Arabic Risotto",
                             "id": "X20Y",
                             "type": "recipe"
                         }
@@ -189,10 +183,10 @@ Query Parameters: kitchen-id
                 {
                     "id": "M12312”,
                     "title": "Arabic Risotto with Salad”,
-                    "servings":40,
-                    "co2Value":35,
+                    "servings": 40,
+                    "co2Value": 35,
                     "co2Rating": "e",
-                    "vitaScore":822
+                    "vitaScore": 822
                     "vitaScoreRating": "b",
                     "waterScarcity": 22,
                     "waterScarcityRating": "c",
@@ -214,7 +208,6 @@ Query Parameters: kitchen-id
                             "quantity": { "amount":100, "unit": "g" },
                             "component":
                                 {
-                                    "title":"Mushroom Salat",
                                     "id": "X20Y",
                                     "type": "recipe"
                                 }
@@ -223,9 +216,8 @@ Query Parameters: kitchen-id
                             "quantity": { "amount":2, "unit": "servings" },
                             "component":
                                 {
-                                    "title":"Arabic Risotto",
                                     "id": "X20Y",
-                                    "type": "recipe"
+                                    "type": "product"
                                 }
                         },
                         ...
@@ -272,7 +264,6 @@ Query Parameters: kitchen-id
                             "quantity": { "amount":100, "unit": "g" },
                             "component":
                                 {
-                                    "title":"Mushroom Salat",
                                     "id": "X20Y",
                                     "type": "recipe"
                                 }
@@ -281,7 +272,6 @@ Query Parameters: kitchen-id
                             "quantity": { "amount":150, "unit": "g" },
                             "component":
                                 {
-                                    "title":"Arabic Risotto",
                                     "id": "X20Y",
                                     "type": "recipe"
                                 }
@@ -316,7 +306,7 @@ Query Parameters: kitchen-id
                     "component": 
                         { 
                             "id": "G563",
-                            "type": "conceptual-product"
+                            "type": "product"
                         }
                 },
                 …
@@ -329,7 +319,7 @@ Query Parameters: kitchen-id
 + Response 201 (application/json)
 
 
-## Product [/products] 
+## Product Collection [/products] 
 
 ### List All Products [GET]
 
@@ -340,6 +330,7 @@ Query Parameters: kitchen-id
                 {
                     "id": "G563",
                     "name": "Zucchini",
+                    "type": "product"
                     "configurationPossibilities": {
                         "production": ["standard", "organic"],
                         "conservation": ["fresh", "dried"]
@@ -348,6 +339,7 @@ Query Parameters: kitchen-id
                 {
                     "id": "G563",
                     "name": "Zucchini",
+                    "type": "product"
                     "configurationPossibilities": {
                         "production": ["standard", "suckler-cow"],
                         "conservation": ["fresh", "frozen", "conserved"]
@@ -356,3 +348,18 @@ Query Parameters: kitchen-id
                 ...
             ]
         }
+     
+     
+## Product [/products/{id}]     
+        
+### Create/update new product [PUT]
+
++ Request (application/json)
+
+        {
+            "id": "G563",
+            "name": "Zucchini",
+            "type": "product"
+        }
+
++ Response 201 (application/json)
